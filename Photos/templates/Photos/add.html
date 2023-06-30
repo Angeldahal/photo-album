@@ -2,9 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ADD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Add Photo</title>
 </head>
-<body>
-
+<body class="m-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="{% url 'gallery' %}" class="btn btn-dark my-5">
+                    Go Back
+                </a>
+                <form method="post" action="" enctype="multipart/form-data">
+                    <% csrf_token %>
+                    <div class="form-group m-3">
+                        <label for="description">Description</label>
+                        <textarea required class="form-control" name="description" placeholder="Enter a Description" id="description"></textarea>
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="category">Category</label>
+                        <select name="category" class="form-control" id="category">
+                            <option value="none">Choose...</option>
+                            {% for category in categories%}
+                            <option value="{{ category.id }}">{{category.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group m-3">
+                        <label>Create a new Category</label>
+                        <input name="new_category" type="text" class="form-control" placeholder="Enter a new Category">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="image-file">Input Your File</label>
+                        <input required name="image" type="file" class="form-control-file" id="image-file">
+                    </div>
+                    <button type="submit" class="btn btn-dark m-3">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
