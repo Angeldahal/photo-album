@@ -5,7 +5,12 @@ from .models import Category, Photo
 # Create your views here.
 def gallery(request):
     categories = Category.objects.all()
-    photos = Photo.objects.all()
+
+    if request.GET.get('category'):
+        photos = Photo.objects.filter(
+            category__name=request.GET.get('category'))
+    else:
+        photos = Photo.objects.all()
     context = {"categories": categories, "photos": photos}
     return render(request, 'Photos/gallery.html', context)
 
@@ -24,8 +29,8 @@ def addPhoto(request):
 
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
-        elif data['category_new'] != '':
-            category, created = Category.objects.get_or_create(name=data['category_new'])
+        elif data['new_category'] != '':
+            category, created = Category.objects.get_or_create(name=data['new_category'])
         else:
             category = None
 

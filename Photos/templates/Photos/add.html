@@ -6,14 +6,14 @@
     <title>Add Photo</title>
 </head>
 <body class="m-5">
-    <div class="container">
+    <div class="container border border-dark rounded">
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <a href="{% url 'gallery' %}" class="btn btn-dark my-5">
                     Go Back
                 </a>
                 <form method="post" action="" enctype="multipart/form-data">
-                    <% csrf_token %>
+                    {% csrf_token %}
                     <div class="form-group m-3">
                         <label for="description">Description</label>
                         <textarea required class="form-control" name="description" placeholder="Enter a Description" id="description"></textarea>
