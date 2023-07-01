@@ -7,16 +7,21 @@
     <title>Photo</title>
 </head>
 <body class="m-5">
+    {% csrf_token %}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col">
                 <a href="{% url 'gallery' %}" class="btn btn-dark my-5">
                     Go Back
                 </a>
+                <a href="{% url 'delete' photo.id %}" class="btn btn-danger my-5 float-end">
+                    Delete
+                </a>
                 <div class="h-100 align-items-center justify-content-center">
                     <img src="{{ photo.image.url }}" alt="Dog Photo" class="img-fluid height-100%">
                     <p> {{ photo.description }}</p>
                 </div>
+
             </div>
         </div>
     </div>

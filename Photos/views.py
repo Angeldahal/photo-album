@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Category, Photo
 
 
@@ -41,3 +41,9 @@ def addPhoto(request):
         )
         return redirect('gallery')
     return render(request, 'Photos/add.html', {'categories': categories})
+
+def deletePhoto(request, pk):
+    image = get_object_or_404(Photo, pk=pk)
+    image.delete()
+    return redirect('gallery')
+
